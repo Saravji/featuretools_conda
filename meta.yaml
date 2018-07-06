@@ -1,0 +1,79 @@
+{% set name = "featuretools" %}
+{% set version = "0.2.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set path_const = "57/12/1441f7bcac0d0286daea1d32d3486a15fa21441e837358a5f00bfaf5cbd3" %}
+{% set hash_value = "4f74417101937dbdad5e1a438b7a19312734ee3ccec02522f0a67526ba2232c3" %}
+
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://files.pythonhosted.org/packages/{{ path_const }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools >=3.3
+    - jupyter==1.0.0
+    - flake8==3.4.1
+    - isort==4.2.15
+    - matplotlib==2.1.1
+    - pytest-runner==4.2
+    - numpy>=1.13.3
+    - scipy>=1.0.0
+    - pandas>=0.20.3
+    - s3fs>=0.1.2
+    - tqdm>=4.19.2
+    - toolz>=0.8.2
+    - pyyaml>=3.12
+    - cloudpickle>=0.4.0
+    - future>=0.16.0
+    - pympler>=0.5
+    - dask>=0.17.5
+    - distributed>=1.21.8
+    - psutil
+  run:
+    - python
+    - numpy>=1.13.3
+    - scipy>=1.0.0
+    - pandas>=0.20.3
+    - s3fs>=0.1.2
+    - tqdm>=4.19.2
+    - toolz>=0.8.2
+    - pyyaml>=3.12
+    - cloudpickle>=0.4.0
+    - future>=0.16.0
+    - pympler>=0.5
+    - dask>=0.17.5
+    - distributed>=1.21.8
+    - psutil
+
+test:
+  imports:
+    - featuretools
+  requires:
+    - pytest==3.5.1
+    - mock==2.0.0
+    - pytest-xdist==1.20.1
+    - pytest-cov==2.5.1
+    - pyarrow>=0.9.0
+
+about:
+  home: https://featuretools.com
+  license: BSD 3 clause
+  license_family: BSD
+  license_file: LICENSE
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
